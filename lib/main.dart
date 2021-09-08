@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/ui/page_sample_a.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  // 状态管理/依赖管理/路由管理
+  /*
+      只用Get来进行状态管理或依赖管理，就没有必要使用GetMaterialApp。
+      GetMaterialApp对于路由、snackbar、国际化、bottomSheet、对话框以及与路由相关的高级apis和没有上下文（context）的情况下是必要的
+   */
+  runApp(
+      GetMaterialApp(
+        home: MyApp(),
+      )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,13 +38,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: Text("PageSampleA"),
+        // 路由 https://github.com/jonataslaw/getx/blob/master/documentation/zh_CN/route_management.md#navigation-with-named-routes
+        onPressed: () => Get.to(PageSampleA()),
+      ),
     );
   }
 }
